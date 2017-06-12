@@ -102,14 +102,14 @@ var LightController = {
 		tap.digitalWrite(0);
 		tap1.digitalWrite(0);
 		tap2.digitalWrite(0);
-		tap3.digitalWrite(0);
+		tap3.digitalWrite(1);
 		}
 	if(!status)
 		{
 		tap.digitalWrite(1);
 		tap1.digitalWrite(1);
 		tap2.digitalWrite(1);
-		tap3.digitalWrite(1);		
+		tap3.digitalWrite(0);		
 		}
   },
 
