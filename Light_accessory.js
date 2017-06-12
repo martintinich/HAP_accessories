@@ -3,10 +3,13 @@ var Service = require('../').Service;
 var Characteristic = require('../').Characteristic;
 var uuid = require('../').uuid;
 var Gpio = require('pigpio').Gpio,
-	green = new Gpio(21, {mode:Gpio.OUTPUT}),
-	red = new Gpio(16, {mode:Gpio.OUTPUT}),
-	blue = new Gpio(20, {mode:Gpio.OUTPUT}),
-	tap = new Gpio(12, {mode:Gpio.OUTPUT}),
+	green = new Gpio(13, {mode:Gpio.OUTPUT}),
+	red = new Gpio(19, {mode:Gpio.OUTPUT}),
+	blue = new Gpio(26, {mode:Gpio.OUTPUT}),
+	tap = new Gpio(2, {mode:Gpio.OUTPUT}),
+	tap1 = new Gpio(3, {mode:Gpio.OUTPUT}),
+	tap2 = new Gpio(4, {mode:Gpio.OUTPUT}),
+	tap3 = new Gpio(17, {mode:Gpio.OUTPUT}),
 	button = new Gpio(5, {mode: Gpio.INPUT,pullUpDown: Gpio.PUD_UP,edge: Gpio.FALLING_EDGE });
 var R=255,G=255,B=255;
 
@@ -97,10 +100,16 @@ var LightController = {
 	if (status)
 		{
 		tap.digitalWrite(0);
+		tap1.digitalWrite(0);
+		tap2.digitalWrite(0);
+		tap3.digitalWrite(0);
 		}
 	if(!status)
 		{
-		tap.digitalWrite(1);			
+		tap.digitalWrite(1);
+		tap1.digitalWrite(1);
+		tap2.digitalWrite(1);
+		tap3.digitalWrite(1);		
 		}
   },
 
