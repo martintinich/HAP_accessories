@@ -6,10 +6,7 @@ var Gpio = require('pigpio').Gpio,
 	green = new Gpio(19, {mode:Gpio.OUTPUT}),
 	red = new Gpio(13, {mode:Gpio.OUTPUT}),
 	blue = new Gpio(26, {mode:Gpio.OUTPUT}),
-	tap = new Gpio(22, {mode:Gpio.OUTPUT}),
-	tap1 = new Gpio(27, {mode:Gpio.OUTPUT}),
-	tap2 = new Gpio(4, {mode:Gpio.OUTPUT}),
-	tap3 = new Gpio(17, {mode:Gpio.OUTPUT}),
+	tap = new Gpio(4, {mode:Gpio.OUTPUT}),
 	button = new Gpio(5, {mode: Gpio.INPUT,pullUpDown: Gpio.PUD_UP,edge: Gpio.FALLING_EDGE });
 var R=255,G=255,B=255;
 
@@ -100,16 +97,12 @@ var LightController = {
 	if (status)
 		{
 		tap.digitalWrite(0);
-		tap1.digitalWrite(0);
-		tap2.digitalWrite(0);
-		tap3.digitalWrite(1);
+		HSVtoRGB(this.hue,this.saturation,this.brightness);
+		RGBtoPIN();
 		}
 	if(!status)
 		{
 		tap.digitalWrite(1);
-		tap1.digitalWrite(1);
-		tap2.digitalWrite(1);
-		tap3.digitalWrite(0);		
 		}
   },
 
