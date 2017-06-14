@@ -3,7 +3,8 @@ var Service = require('../').Service;
 var Characteristic = require('../').Characteristic;
 var uuid = require('../').uuid;
 var err = null; // in case there were any problems
-
+var Gpio = require('pigpio').Gpio,
+	multimedia = new Gpio(17, {mode:Gpio.OUTPUT}),
 // here's a fake hardware device that we'll expose to HomeKit
 var FAKE_OUTLET = {
     setPowerOn: function(on) {
@@ -11,9 +12,11 @@ var FAKE_OUTLET = {
     if (on) {
           FAKE_OUTLET.powerOn = true;
           if(err) { return console.log(err); }
+		  multimedia.digitalWrite(0);
           console.log("...outlet is now on.");
     } else {
           FAKE_OUTLET.powerOn = false;
+		  multimedia.digitalWrite(1);
           if(err) { return console.log(err); }
           console.log("...outlet is now off.");
     }
