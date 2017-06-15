@@ -6,16 +6,16 @@ var err = null; // in case there were any problems
 var Gpio = require('pigpio').Gpio,
 	multimedia = new Gpio(17, {mode:Gpio.OUTPUT});
 // here's a fake hardware device that we'll expose to HomeKit
-var FAKE_OUTLET = {
+var FAKE_OUTLET1 = {
     setPowerOn: function(on) {
     console.log("Turning the outlet %s!...", on ? "on" : "off");
     if (on) {
-          FAKE_OUTLET.powerOn = true;
+          FAKE_OUTLET1.powerOn = true;
           if(err) { return console.log(err); }
 		  multimedia.digitalWrite(0);
           console.log("...outlet is now on.");
     } else {
-          FAKE_OUTLET.powerOn = false;
+          FAKE_OUTLET1.powerOn = false;
 		  multimedia.digitalWrite(1);
           if(err) { return console.log(err); }
           console.log("...outlet is now off.");
@@ -47,7 +47,7 @@ outlet
 
 // listen for the "identify" event for this Accessory
 outlet.on('identify', function(paired, callback) {
-  FAKE_OUTLET.identify();
+  FAKE_OUTLET1.identify();
   callback(); // success
 });
 
@@ -57,7 +57,7 @@ outlet
   .addService(Service.Outlet, "Fake Outlet") // services exposed to the user should have "names" like "Fake Light" for us
   .getCharacteristic(Characteristic.On)
   .on('set', function(value, callback) {
-    FAKE_OUTLET.setPowerOn(value);
+    FAKE_OUTLET1.setPowerOn(value);
     callback(); // Our fake Outlet is synchronous - this value has been successfully set
   });
 
@@ -70,11 +70,11 @@ outlet
 
     // this event is emitted when you ask Siri directly whether your light is on or not. you might query
     // the light hardware itself to find this out, then call the callback. But if you take longer than a
-    // few seconds to respond, Siri will give up.
+    // few seconds sfsdfto respond, Siri will give up.
 
     var err = null; // in case there were any problems
 
-    if (FAKE_OUTLET.powerOn) {
+    if (FAKE_OUTLET1.powerOn) {
       console.log("Are we on? Yes.");
       callback(err, true);
     }
