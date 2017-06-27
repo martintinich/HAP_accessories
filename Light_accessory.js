@@ -10,6 +10,7 @@ var Gpio = require('pigpio').Gpio,
 	button = new Gpio(5, {mode: Gpio.INPUT,pullUpDown: Gpio.PUD_UP,edge: Gpio.FALLING_EDGE });
 var R=255,G=255,B=255;
 
+
 button.on('interrupt', function (level) {
 console.log("Interrupt!");
 if (LightController.getPower()==true){
