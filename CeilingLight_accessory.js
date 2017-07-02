@@ -3,8 +3,9 @@ var Service = require('../').Service;
 var Characteristic = require('../').Characteristic;
 var uuid = require('../').uuid;
 var Gpio = require('pigpio').Gpio,
-	rele = new Gpio(9, {mode:Gpio.OUTPUT})
+	rele = new Gpio(9, {mode:Gpio.OUTPUT, pullUpDown: Gpio.PUD_UP}),		
 	button = new Gpio(5, {mode: Gpio.INPUT,pullUpDown: Gpio.PUD_DOWN,edge: Gpio.RISING_EDGE });
+rele.digitalWrite(1);
 
 
 button.on('interrupt', function (level) {
